@@ -1,0 +1,195 @@
+{
+   "swagger": "2.0",
+   "info": {
+      "description": "API backend for Project Memory Clients",
+      "version": "1.0.0",
+      "title": "Memory API",
+      "contact": {
+         "email": "admin@project-memory.org"
+      },
+      "license": {
+         "name": "Apache 2.0",
+         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+   },
+   "tags": [
+      {
+         "name": "admins",
+         "description": "Secured Admin-only calls"
+      },
+      {
+         "name": "mods",
+         "description": "Operations available to moderators"
+      },
+      {
+         "name": "users",
+         "description": "Operations available to authenticated users"
+      },
+      {
+         "name": "anonymous",
+         "description": "Anonymous access operations (authentication related)"
+      }
+   ],
+   "paths": {
+      "/auth/login": {
+         "post": {
+            "tags": [
+               "anonymous"
+            ],
+            "summary": "attemps a log in with post body",
+            "operationId": "authLogin",
+            "description": "Validates the user credentials specified in the post body and generates a login session if correct.\n",
+            "produces": [
+               "text/plain"
+            ],
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "description": "Login form data",
+                  "required": true,
+                  "schema": {
+                     "properties": {
+                        "identifier": {
+                           "type": "string"
+                        },
+                        "password": {
+                           "type": "string"
+                        }
+                     }
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "successful login, token returned",
+                  "schema": {
+                     "type": "string",
+                     "description": "auth token",
+                     "example": "ax2qwdsqds31352-xaAdwx_Q23d1"
+                  }
+               },
+               "400": {
+                  "description": "unsuccessful login / bad request",
+                  "schema": {
+                     "type": "string",
+                     "description": "Error message",
+                     "example": "Invalid request body."
+                  }
+               }
+            }
+         }
+      },
+      "/auth/validate": {
+         "post": {
+            "tags": [
+               "users"
+            ],
+            "summary": "valiates a user token",
+            "operationId": "authValidate",
+            "description": "Validates the authentication token in the header to establish access. Used internally and to validate token on client startup.\n",
+            "produces": [
+               "text/plain"
+            ],
+            "parameters": [
+               {
+                  "in": "header",
+                  "name": "X-AuthToken",
+                  "description": "Auth token to validate",
+                  "required": true,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "auth token validated successfully",
+                  "schema": {
+                     "type": "string",
+                     "example": "axweasdwadqwe131xc123",
+                     "description": "The username belonging to token owner"
+                  }
+               },
+               "400": {
+                  "description": "token failed to validate",
+                  "schema": {
+                     "type": "string",
+                     "description": "Error message",
+                     "example": "Invalid token."
+                  }
+               }
+            }
+         }
+      },
+      "/users/register": {
+         "post": {
+            "tags": [
+               "anonymous"
+            ],
+            "summary": "registers a user with the service",
+            "operationId": "usersRegister",
+            "description": "Validates the input posted and returns an auth token on successful registration.\n",
+            "produces": [
+               "text/plain"
+            ],
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "description": "Registration form data",
+                  "required": true,
+                  "schema": {
+                     "properties": {
+                        "email": {
+                           "type": "string",
+                           "description": "email address for new user",
+                           "example": "test@test.test"
+                        },
+                        "username": {
+                           "type": "string",
+                           "description": "username for new user login",
+                           "example": "username123"
+                        },
+                        "password": {
+                           "type": "string",
+                           "description": "password for new account",
+                           "example": "imasecurepassword"
+                        },
+                        "passwordAgain": {
+                           "type": "string",
+                           "description": "password validation",
+                           "example": "imasecurepassword"
+                        }
+                     }
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "successful registration and automatic login",
+                  "schema": {
+                     "type": "string",
+                     "description": "auth token",
+                     "example": "21dwer55325txas99awd"
+                  }
+               },
+               "400": {
+                  "description": "invalid request / error creating account",
+                  "schema": {
+                     "type": "string",
+                     "description": "error message",
+                     "example": "Invalid request body."
+                  }
+               },
+               "500": {
+                  "description": "internal server error / exception in request processing"
+               }
+            }
+         }
+      }
+   },
+   "host": "virtserver.swaggerhub.com",
+   "schemes": [
+      "https"
+   ],
+   "basePath": "/Project-Memory/MemoryApi/1.0.0"
+}
