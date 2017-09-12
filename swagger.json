@@ -39,14 +39,7 @@
           "description" : "Login form data",
           "required" : true,
           "schema" : {
-            "properties" : {
-              "identifier" : {
-                "type" : "string"
-              },
-              "password" : {
-                "type" : "string"
-              }
-            }
+            "$ref" : "#/definitions/loginModel"
           }
         } ],
         "responses" : {
@@ -116,28 +109,7 @@
           "description" : "Registration form data",
           "required" : true,
           "schema" : {
-            "properties" : {
-              "email" : {
-                "type" : "string",
-                "description" : "email address for new user",
-                "example" : "test@test.test"
-              },
-              "username" : {
-                "type" : "string",
-                "description" : "username for new user login",
-                "example" : "username123"
-              },
-              "password" : {
-                "type" : "string",
-                "description" : "password for new account",
-                "example" : "imasecurepassword"
-              },
-              "passwordAgain" : {
-                "type" : "string",
-                "description" : "password validation",
-                "example" : "imasecurepassword"
-              }
-            }
+            "$ref" : "#/definitions/registerModel"
           }
         } ],
         "responses" : {
@@ -160,6 +132,42 @@
           "500" : {
             "description" : "internal server error / exception in request processing"
           }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "loginModel" : {
+      "properties" : {
+        "identifier" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    },
+    "registerModel" : {
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "description" : "email address for new user",
+          "example" : "test@test.test"
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "username for new user login",
+          "example" : "username123"
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "password for new account",
+          "example" : "imasecurepassword"
+        },
+        "passwordAgain" : {
+          "type" : "string",
+          "description" : "password validation",
+          "example" : "imasecurepassword"
         }
       }
     }
