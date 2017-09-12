@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <Configurations>Debug;Release;MemoryApi;MemoryClient.Web-Release</Configurations>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>    
+    <PackageReference Include="Aliencube.Autofac.Extras.CommonServiceLocator" Version="4.0.1" />    
+    <PackageReference Include="Autofac" Version="4.3.0" />    
+    <PackageReference Include="Baseclass.Contrib.Nuget.Output" Version="2.3.0" />    
+    <PackageReference Include="FaunaDB.Client" Version="1.2.0" />    
+    <PackageReference Include="libsodium-net" Version="0.10.0" />    
+    <PackageReference Include="MemoryCore" Version="1.0.0" />    
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.2" />    
+    <PackageReference Include="UrlBase64" Version="0.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <RootNamespace>MemoryApi</RootNamespace>
+  </PropertyGroup>
+</Project>

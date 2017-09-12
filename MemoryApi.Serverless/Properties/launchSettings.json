@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "MemoryApi": {
+      "commandName": "Project",
+      "commandLineArgs": "host start --pause-on-error --debug VS",
+      "environmentVariables": {
+        "FAUNA_HOST": "localhost",
+        "FAUNA_SECRET": "secret",
+        "FUNCTION_ENV": "Development",
+        "FAUNA_SCHEME": "http",
+        "FAUNA_PORT": "8443"
+      }
+    }
+  }
+}
