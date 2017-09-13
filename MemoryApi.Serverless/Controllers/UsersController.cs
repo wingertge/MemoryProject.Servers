@@ -23,7 +23,7 @@ namespace MemoryApi.Controllers
                 return req.CreateResponse(HttpStatusCode.BadRequest, "Received auth token on register.");
 
             var model = await req.Content.ReadAsAsync<RegisterModel>();
-            if (!model?.IsValid() ?? true)
+            if ((!model?.IsValid() ?? true) || model.Password != model.PasswordConfirm /*Compatibility Fix*/)
                 return req.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid request body.");
 
             var userService = Services.GetInstance<IUserService>();
